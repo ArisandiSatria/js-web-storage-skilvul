@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      margin-bottom: 1rem;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div>
+    <label for="firstname">Nama Depan</label>
+    <input type="text" id="firstname">
+  </div>
+  <div>
+    <label for="lastname">Nama Belakang</label>
+    <input type="text" id="lastname">
+  </div>
+  <div>
+    <span>Gender</span>
+    <input type="radio" value="Laki-laki" name="gender">
+    <label for="gender">Laki-laki</label>
+    <input type="radio" value="Perempuan" name="gender">
+    <label for="gender">Perempuan</label>
+  </div>
+  <div>
+    <label for="address">Alamat</label>
+    <input type="text" id="address">
+  </div>
+  <div>
+    <span>Tipe Penyimpanan</span>
+    <input type="radio" value="Session" name="storage-type">
+    <label for="storage-type">Session Storage</label>
+    <input type="radio" value="Local" name="storage-type">
+    <label for="storage-type">Local Storage</label>
+    <input type="radio" value="Cookie" name="storage-type">
+    <label for="storage-type">Cookie Storage</label>
+  </div>
+  <div>
+    <button id="btn-1">Button 1</button>
+    <button id="btn-2">Button 2</button>
+  </div>
+
+  <div id="result"></div>
+  <script type="module" src="script.js"></script>
+</body>
+
+</html>
