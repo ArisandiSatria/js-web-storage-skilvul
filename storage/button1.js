@@ -50,16 +50,11 @@ export function btn1Click() {
             lastname: lastname.value,
             address: address.value,
             gender,
-            storageType,
+            storageType: storageType[i].value,
           };
 
           for (let i = 0; i < gender.length; i++) {
             if (gender[i].checked) obj["gender"] = gender[i].value;
-          }
-
-          for (let i = 0; i < storageType.length; i++) {
-            if (storageType[i].checked)
-              obj["storageType"] = storageType[i].value;
           }
 
           sessionStorage.setItem("data", JSON.stringify(obj));
