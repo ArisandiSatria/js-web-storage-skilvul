@@ -342,6 +342,127 @@ else if (storageType[i].value == "Session") {
   item = JSON.parse(sessionStorage.getItem("data"));
 ```
 
-Pada bagian penyimpana _session_ ini kurang lebih sama dengan penyimpanan _local_ karena sintaksnya sangat mirip sekali.
+Pada bagian penyimpanan _session_ ini kurang lebih sama dengan penyimpanan _local_ karena sintaksnya sangat mirip sekali.
 
-### **Bagian Keempat**
+### **Bagian Kelima**
+
+```javascript
+else if (storageType[i].value == "Cookie") {
+  let obj = {
+    firstname: firstname.value,
+    lastname: lastname.value,
+    address: address.value,
+    gender,
+    storageType: storageType[i].value,
+  };
+
+  for (let i = 0; i < gender.length; i++) {
+    if (gender[i].checked) obj["gender"] = gender[i].value;
+  }
+
+  for (const [key, value] of Object.entries(obj)) {
+    document.cookie = `${key}=${value}; expires=Thu, 20 Apr 2023 23:59:00`;
+  }
+
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let getItems = decodedCookie.split(";");
+
+  let temp = {};
+
+  for (let i = 0; i < getItems.length; i++) {
+    var cookie = getItems[i].split("=");
+    var cookieName = cookie[0].trim();
+    var cookieValue = cookie[1];
+    temp[cookieName] = cookieValue;
+  }
+
+  item = temp;
+}
+```
+
+Pada bagian ini, untuk kode:
+
+```javascript
+let obj = {
+  firstname: firstname.value,
+  lastname: lastname.value,
+  address: address.value,
+  gender,
+  storageType: storageType[i].value,
+};
+
+for (let i = 0; i < gender.length; i++) {
+  if (gender[i].checked) obj["gender"] = gender[i].value;
+}
+```
+
+Kurang lebih sama dengan bagian ketiga dan keempat. Namun, untuk kode berikut,
+
+```javascript
+for (const [key, value] of Object.entries(obj)) {
+    document.cookie = `${key}=${value}; expires=Thu, 20 Apr 2023 23:59:00`;
+  }
+
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let getItems = decodedCookie.split(";");
+
+  let temp = {};
+
+  for (let i = 0; i < getItems.length; i++) {
+    var cookie = getItems[i].split("=");
+    var cookieName = cookie[0].trim();
+    var cookieValue = cookie[1];
+    temp[cookieName] = cookieValue;
+  }
+
+  item = temp;
+}
+```
+
+Saya melakukan looping pada variabel _obj_ untuk menambahkan data dari objek ke dalam cookie yang saya set expire-nya hari kamis, 20 April 2023. Lalu saya membuat variabel bernama _decodedCookie_ untuk mengambil dan membersihkan _cookie_ dari karakter-karakter unik jika ada. Setelah itu saya pisahkan menggunakan _.split(";")_ agar setiap value dari _cookie_ bisa dipisah dan menjadi array.
+
+lalu saya membuat sebuah objek bernama _temp_, lalu saya looping array tadi yang didalamnya saya pisahkan lagi value dari _cookie_ dengan _.split("=")_. Setelah itu saya hilangkan _whitespace_ array ke-0 yang dimana ini adalah key dari value _cookie_ dengan _.trim()_. Setelah itu saya tambahkan key dan value tadi ke dalam objek _temp_. Kemudian saya set vaiabel _item_ dengan variabel objek _temp_.
+
+### **Bagian Keenam**
+
+```javascript
+let html = "";
+
+    for (const [key, value] of Object.entries(item)) {
+      html = html + `<li>${value}</li>`;
+    }
+
+    result.innerHTML = `<p><ul>${html}</ul></p>`;
+  });
+}
+```
+
+Pada bagian ini, saya membuat sebuah variabel kosong dengan nama _html_ berisi string kosong sebagai penampung. Lalu saya buat perulangan yang akan menambahkan value dari objek _item_ ke dalam variabel _html_. Setelah itu saya masukkan hasil kumpulan di variabel _html_ tadi ke web dengan _.innerHTML_.
+
+## 3. **button2.js**
+
+File ini berisikan kode yang hampir sama persis dengan file **button1.js** hanya saja, tidak ada baris kode untuk menghapus penyimpanan _local_, _session_, dan _cookie_ serta pada pemasangan kode ke web tidak diganti melainkan ditambah.
+
+Tidak ada baris kode ini,
+
+```javascript
+localStorage.clear();
+sessionStorage.clear();
+
+if (document.cookie.length > 0) {
+  let cookies = document.cookie.split(";");
+
+  for (let i = 0; i < cookies.length; i++) {
+    let cookieName = cookies[i].split("=")[0].trim();
+    document.cookie = cookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+  }
+}
+
+result.innerHTML = "";
+```
+
+Menggunakan tanda "+",
+
+```javascript
+result.innerHTML += `<p><ul>${html}</ul></p>`;
+```
